@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: foodiego_app
+    ports:
+      - "9090:9090"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/foodiego
+      SPRING_DATASOURCE_USERNAME: foodiego
+      SPRING_DATASOURCE_PASSWORD: foodiego
+  
+  db:
+    image: postgres:latest
+    container_name: foodiego_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: foodiego
+      POSTGRES_USER: foodiego
+      POSTGRES_PASSWORD: foodiego
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
