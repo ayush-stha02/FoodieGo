@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Styling for the Admin Dashboard */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .dashboard {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        .dashboard a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .dashboard a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+        }
+
+        .logout-btn input {
+            background: #ff4b5c;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .logout-btn input:hover {
+            background: #e63946;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard">
+        <h1>Admin Dashboard</h1>
+
+        <div><a href="/admin/product">Products</a></div>
+        <div><a href="/admin/productCategory">Product Categories</a></div>
+
+        <div class="logout-btn">
+            <form action="/logout" method="post">
+                <input type="submit" value="Logout" />
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

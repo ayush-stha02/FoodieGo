@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Categories</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            background: #4CAF50;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        a:hover {
+            background: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background: #4CAF50;
+            color: white;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background: #f1f1f1;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions a {
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .actions .delete {
+            background: #d9534f;
+        }
+
+        .actions .delete:hover {
+            background: #c9302c;
+        }
+
+        .actions .edit {
+            background: #0275d8;
+        }
+
+        .actions .edit:hover {
+            background: #025aa5;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Product Categories</h1>
+    
+    <div><a href="/admin/productCategory/add">Add New Category</a></div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>SN</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="category, idx: ${productCategories}">
+                <td th:text="${idx.count}"></td>
+                <td th:text="${category.name}"></td>
+                <td th:text="${category.description}"></td>
+                <td>
+                    <img style="width: 100px;" th:if="${category.image != null}" th:src="@{/uploads/{path}(path=${category.image})}" alt="Category Image" />
+                    <span th:if="${category.image == null}">No image available</span>
+                </td>
+                <td>
+                    <div class="actions">
+                        <a class="edit" href="/admin/productCategory/edit/{id}(id=${category.id})">Edit</a>
+						<form action="/admin/productCategory/delete" method="post">
+							<input type="hidden" name="id" th:value="${category.id}" />
+							<input class="delete" type="submit" value="Delete" />
+						</form> 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

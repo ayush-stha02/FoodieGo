@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #ff7e5f, #feb47b);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            text-align: left;
+            width: 300px;
+        }
+
+        form div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            background: #f1f1f1;
+        }
+
+        input[type="submit"] {
+            background: #ff6f61;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background: #d9534f;
+        }
+
+        .error {
+            color: #ff4b5c;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        p a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Register</h1>
+
+        <form action="/register" method="post" th:object="${user}">
+            <div>
+                <label for="fullname">Full Name:</label>
+                <input type="text" th:field="*{fullname}" placeholder="Enter your full name" />
+            </div>
+
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" th:field="*{username}" placeholder="Choose a username" />
+            </div>
+
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" th:field="*{password}" placeholder="Enter a strong password" />
+            </div>
+
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" th:field="*{email}" placeholder="Enter your email address" />
+            </div>
+
+            <div>
+                <input type="submit" value="Register" />
+            </div>
+        </form>
+
+        <div class="error" th:if="${error.hasError}" th:text="${error.msg}"></div>
+
+        <p>Already registered? <a href="/login">Login Now</a></p>
+    </div>
+</body>
+
+</html>

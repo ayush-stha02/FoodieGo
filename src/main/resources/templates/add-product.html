@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Product</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* Inline styles for demonstration */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background: #4facfe;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background: #00f2fe;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+  
+	
+	<!--forUpdate-->
+
+    <form th:action="@{/admin/product/{a}(a=${forUpdate} ? 'update/' + ${product.id} : 'add')}" method="post" th:object="${product}" enctype="multipart/form-data">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" placeholder="Enter product name" />
+        </div>
+
+        <div>
+            <label for="description">Description:</label>
+            <input type="text" id="description" th:field="*{description}" placeholder="Enter product description" />
+        </div>
+
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" th:field="*{category}">
+                <option th:each="cat : ${productCategories}" th:text="${cat.name}" th:value="${cat.id}">
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label for="unit">UOM:</label>
+            <input type="text" id="unit" th:field="*{unit}" placeholder="Enter unit of measure" />
+        </div>
+
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" th:field="*{price}" placeholder="Enter product price" />
+        </div>
+
+        <div>
+            <label for="image">Image:</label>
+            <input type="file" id="image" th:field="*{image}" />
+        </div>
+
+        <div>
+            <input type="submit" th:value="${forUpdate} ? 'Update' : 'Create'" />
+        </div>
+    </form>
+
+    <div class="error" th:if="${error.hasError}" th:text="${error.msg}"></div>
+</body>
+
+</html>
